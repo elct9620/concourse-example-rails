@@ -15,5 +15,7 @@ run:
   args:
     - -exc
     - |
+      apk --update add git curl
       gem install dpl
+      cd rails
       dpl --provider=heroku --api-key=$HEROKU_KEY --app=concourse-example-rails
