@@ -1,0 +1,36 @@
+resource_types:
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: latest
+
+resources:
+- name: rails
+  type: git
+  source:
+    uri: https://github.com/elct9620/concourse-example-rails.git
+- name: notification
+  type: slack-notification
+  source:
+    url: {{webhook}}
+
+jobs:
+  - name: test
+    plan:
+      - get: rails
+      - task: rspec
+        file: rails/concourse/rspec.yml
+  - name: deploy
+    plan:
+      - get: rails
+      - task: deploy
+        file: rails/concourse/deploy.yml
+        params:
+          HEROKU_KEY: {{heroku-key}}
+      - put: notification
+        params:
+          text: The newest version is deployed!
+
+
+

@@ -1,0 +1,19 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: ruby
+    tag: '2.3-alpine'
+
+inputs:
+- name: rails
+
+run:
+  path: sh
+  args:
+    - -exc
+    - |
+      gem install dpl
+      dpl --provider=heroku --api-key=$HEROKU_KEY --app concourse-example-rails
