@@ -15,6 +15,7 @@ run:
   args:
     - -exc
     - |
+      apk --update add ruby-dev build-base zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev sqlite-dev ruby ruby-io-console ruby-json yaml nodejs
       cd rails
       bundle install
       bundle exec rspec
