@@ -16,4 +16,4 @@ run:
     - -exc
     - |
       gem install dpl
-      dpl --provider=heroku --api-key=$HEROKU_KEY --app concourse-example-rails
+      dpl --provider=heroku --api-key=$HEROKU_KEY --app=concourse-example-rails
