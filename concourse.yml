@@ -17,17 +17,15 @@ resources:
 
 jobs:
   - name: test
-    serial: true
     plan:
       - get: rails
         trigger: true
       - task: rspec
         file: rails/concourse/rspec.yml
   - name: deploy
-    serial: true
     plan:
       - get: rails
-        trigger: true
+        passed: [test]
       - task: deploy
         file: rails/concourse/deploy.yml
         params:
